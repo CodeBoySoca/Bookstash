@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/main.js"></script>
+        <link rel="stylesheet" href="http://localhost:8888/bookstash/stylesheets/main.css">
+        <script src="http://localhost:8888/bookstash/js/main.js"></script>
     </head>
    <body> 
     <header>
