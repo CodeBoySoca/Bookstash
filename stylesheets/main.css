@@ -177,7 +177,7 @@ nav ul li a {
 
 #contact h1 {
   font: 900 3em azo-sans-web, sans-serif;
-  margin: 0 0 10px 0;
+  margin: 0 0 50px 0;
   text-align: left;
 }
 
@@ -222,4 +222,84 @@ nav ul li a {
   font: 900 1.2em azo-web-sans, sans-serif;
   text-transform: capitalize;
   margin-top: 50px;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.modal {
+  background: #fafafa;
+  margin: 10% auto 0 auto;
+  width: 25%;
+  height: 600px;
+  border-radius: 8%;
+  padding: 2%;
+}
+
+.modal form {
+  width: 80%;
+  margin: 25px auto 0 auto;
+}
+
+.modal h3 {
+  font: 900 1.4em azo-sans-web, sans-serif;
+  margin: 50px 0 10px 50px;
+  text-align: left;
+  color: #37171D;
+}
+
+.modal form input {
+  width: 100%;
+  height: 45px;
+  margin: 10px 0;
+  border: none;
+  background: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal input {
+  width: 100%;
+}
+
+
+.modal form input[type='submit'] {
+  background: #F87C5A;
+  width: 100%;
+  height: 65px;
+  color: #F8F1C7;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 35px;
+}
+
+
+/* .modal input {
+   */
+
+
+.modal p {
+  font: 200 0.9em azo-web-sans, sans-serif;
+  text-align: center;
+  color: #37171D;
+  margin-top: 10px;
+}
+
+.modal a {
+  color: #37171D;
+  font: 200 0.9em azo-web-sans, sans-serif;
+}
+
+#close {
+  font: 100 3em azo-web-sans, sans-serif;
+  margin-top: 25px;
+  color: #fff;
+  text-align: center;
 }

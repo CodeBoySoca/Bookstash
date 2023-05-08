@@ -5,6 +5,7 @@
     <head>
         <link rel="stylesheet" href="https://use.typekit.net/wea4hky.css">
         <link rel="stylesheet" href="http://localhost:8888/bookstash/stylesheets/main.css">
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
         <script src="http://localhost:8888/bookstash/js/main.js"></script>
     </head>
    <body> 

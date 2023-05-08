@@ -2,7 +2,7 @@
 <div id="masthead">
   <h1>A community for readers</h1>
   <h2>Read, Review, Discuss your favorite Books</h2>
-  <button>Sign up</button>
+  <button id="signup-button">Sign up</button>
 </div>
 <div id="features">
    <div id="community">
