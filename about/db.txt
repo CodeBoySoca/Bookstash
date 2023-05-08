@@ -1,0 +1,172 @@
+<?php include __DIR__.'/../includes/header.php'; ?>
+<h1>Book club</h1>
+<?php 
+
+//     $db_host = '127.0.0.1';
+//     $db_user = 'root';
+//     $db_password = 'root';
+//     $db_db = 'bookstash';
+//     $db_port = 8889;
+  
+//     $mysqli = new mysqli(
+//       $db_host,
+//       $db_user,
+//       $db_password,
+//       $db_db,
+//       $db_port
+//     );
+      
+//     if ($mysqli->connect_error) {
+//       echo 'Errno: '.$mysqli->connect_errno;
+//       echo '<br>';
+//       echo 'Error: '.$mysqli->connect_error;
+//       exit();
+//     }
+       
+
+// $query = "INSERT INTO book(title, author, publish_date, category, likes, cover, summary) VALUES('Learning Sinatra', 'Sudeep Agarwal', 2016, 'Computer Programming', 0, 'cover.jpg','Learning Sinatra arms you with everything you need to get up and running building web apps with ruby quickly.')";
+    
+    
+//     $res = $mysqli->query($query);
+
+
+//     if (!$res) {
+
+//         echo "failed to execute query: $mysqli->error";
+//     } else {
+//         echo "Query: $query executed\n";
+//     }
+
+//     if (is_object($res)) {
+
+//         $res->close();
+//     }
+
+
+//     $mysqli->close();
+
+
+
+    class Database {
+        public $host;
+        public $username;
+        public $passwd;
+        public $db;
+        public $port;
+
+        public function __construct($host, $username, $passwd, $db, $port) {
+             $this->host=$host;
+             $this->username=$username;
+             $this->passwd=$passwd;
+             $this->db=$db;
+             $this->port=$port;
+        }
+
+        public function establish_connection() {
+            $connection = new mysqli($this->host, $this->username, $this->passwd,  $this->db, $this->port);
+            return $connection ? $connection : die("Unable to connect: {$connection->connect_errno}");
+        } 
+
+        public function query_result($query) {
+            $connection = $this->establish_connection()->query($query);
+            $result = $connection ? $connection->fetch_object() : "Failed execution: {$query}";
+            return is_object($result) ? $result : null; 
+        }
+
+    }
+
+
+
+   $book_columns = Array('title', 'author', 'publish_date', 'category', 'likes', 'cover', 'summary');
+   $book_array = Array(
+        Array('The Well-Grounded Rubyist, Second Edition', 'David A. Black', 2014, 'Computer Programming', 125, 'cover.jpg', 'The Well-Grounded Rubyist, Second Edition is a creative tutorial that begins with your first Ruby program and goes on to explore sophisticated topics like callable objects, reflection, and threading. The book concentrates on the language, preparing you to use Ruby in any way you choose. This second edition includes coverage of Ruby features such as keyword arguments, lazy enumerators, and Module#prepend, along with information on new and changed core classes and methods.'),
+        Array('Secrets of the JavaScript Ninja', 'Bear Bibeault', 2016, 'Computer Programming', 534, 'cover.png', 'Secrets of the JavaScript Ninja, Second Edition uses practical examples to clearly illustrate each core concept and technique. This completely revised edition shows you how to master key JavaScript concepts such as functions, closures, objects, prototypes, and promises. It covers APIs such as the DOM, events, and timers. You’ll discover best practice techniques such as testing and cross-browser development, all taught from the perspective of skilled JavaScript practitioners.'),
+        Array('Grokking Algorithms', 'Aditya Bhargava', 2016, 'Computer Science', 1232, 'cover.jpg', 'Grokking Algorithms is a friendly guide that teaches you how to apply common algorithms to the practical problems you face every day as a programmer. You\'ll start with sorting and searching and, as you build up your skills in thinking algorithmically, you\'ll tackle more complex concerns such as data compression and artificial intelligence. Learning about algorithms doesn\'t have to be boring!'),
+        Array('Clean Code', 'Robert C. Martin', 2009, 'Computer Programming', 899, 'cover.jpg', 'Even bad code can function. But if code isn’t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn’t have to be that way.'),
+        Array('Math for Programmers', 'Paul Orland', 2020, 'Computer programming', 912, 'cover.jpg', 'In Math for Programmers, you’ll explore important mathematical concepts through hands-on coding. Filled with graphics and more than 200 exercises and mini-projects, this book unlocks the door to interesting - and lucrative! - careers in some of today’s hottest fields. As you tackle the basics of linear algebra, calculus, and machine learning, you’ll master the key Python libraries used to turn them into real-world software applications.'),
+        Array('The Design of Everyday Things', 'Don Norman', 2013, 'Psychology', 510, 'cover.jpg', 'Even the smartest among us can feel inept as we fail to figure out which light switch or oven burner to turn on, or whether to push, pull, or slide a door. The fault, argues this ingenious - even liberating - audiobook, lies not in ourselves, but in product design that ignores the needs of users and the principles of cognitive psychology. The problems range from ambiguous and hidden controls to arbitrary relationships between controls and functions, coupled with a lack of feedback or other assistance and unreasonable demands on memorization'),
+        Array('Art, Inc.', 'Lisa Congdon',  2019, 'Business', 233, 'cover.png', 'You don\'t have to starve to be an artist. Build a career doing what you love. In this practical guide, professional artist Lisa Congdon reveals the many ways you can earn a living by making art - through illustration, licensing, fine art sales, print sales, teaching, and beyond. Including industry advice from such successful art-world pros as Nikki McClure, Mark Hearld, Paula Scher, and more, Art, Inc. will equip you with the tools - and the confidence - to turn your passion into a profitable business.'),
+        Array('Hooked: How to Build Habit-Forming Products', 'Nir Eyal', 2014, 'Marketing', 1024, 'cover.jpg', 'Why do some products capture our attention, while others flop? What makes us engage with certain products out of habit? Is there a pattern underlying how technologies hook us? This audiobook introduces listeners to the "Hooked Model", a four-step process companies use to build customer habits. Through consecutive cycles through the hook, successful products reach their ultimate goal of bringing users back repeatedly - without depending on costly advertising or aggressive messaging.'),
+        Array('Never Finished', 'David Goggins', 2022, 'Self-improvement', 234, 'cover.jpg', 'Can’t Hurt Me, David Goggins’ smash hit memoir, demonstrated how much untapped ability we all have but was merely an introduction to the power of the mind. In Never Finished, Goggins takes you inside his Mental Lab, where he developed the philosophy, psychology, and strategies that enabled him to learn that what he thought was his limit was only his beginning and that the quest for greatness is unending.'),
+        Array('The Light We Carry', 'Michelle Obama', 2022, 'Self-improvement', 1111, 'cover.jpg', 'There may be no tidy solutions or pithy answers to life’s big challenges, but Michelle Obama believes that we can all locate and lean on a set of tools to help us better navigate change and remain steady within flux. In The Light We Carry, she opens a frank and honest dialogue with listeners, considering the questions many of us wrestle with: How do we build enduring and honest relationships? How can we discover strength and community inside our differences? What tools do we use to address feelings of self-doubt or helplessness? What do we do when it all starts to feel like too much?'),
+        Array('Atomic Habits', 'James Clear', 2018, 'Psychology', 675, 'cover.jpg', 'No matter your goals, Atomic Habits offers a proven framework for improving - every day. James Clear, one of the world\'s leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.'),
+        Array('Classic Computer Science Problems in Python', 'David Kopec', 2019, 'Computer Science', 785, 'cover.jpg', 'Classic Computer Science Problems in Python sharpens your CS problem-solving skills with time-tested scenarios, exercises, and algorithms, using Python. You\'ll tackle dozens of coding challenges, ranging from simple tasks like binary search algorithms to clustering data using k-means. You\'ll especially enjoy the feeling of satisfaction as you crack problems that connect computer science to the real-world concerns of apps, data, performance, and even nailing your next job interview!'),
+        Array('The History of Graphic Design. 40th Ed', 'Jens Müller', 2022, 'Graphic Design', 305, 'cover.jpg', 'TASCHEN is 40! Since we started our work as cultural archaeologists in 1980, TASCHEN has become synonymous with accessible publishing, helping bookworms around the world curate their own library of art, anthropology, and aphrodisia at an unbeatable price. Today we celebrate 40 years of incredible books by staying true to our company credo. The 40 series presents new editions of some of the stars of our program―now more compact, friendly in price, and still realized with the same commitment to impeccable production.'),
+        Array('Logo Modernism', 'Jens Müller', 2015, 'Graphic Design', 285, 'cover.jpg', 'Modernist aesthetics in architecture, art, and product design are familiar to many. In soaring glass structures or minimalist canvases, we recognize a time of vast technological advance which affirmed the power of human beings to reshape their environment and to break, radically, from the conventions or constraints of the past. Less well-known, but no less fascinating, is the distillation of modernism in graphic design.'),
+        Array('Thinking with Type', 'Ellen Lupton', 2010, 'Graphic Design', 441, 'cover.jpg', 'The best-selling Thinking with Type in a revised and expanded second edition:Thinking with Type is the definitive guide to using typography in visual communication. Ellen Lupton provides clear and focused guidance on how letters, words, and paragraphs should be aligned, spaced, ordered, and shaped. The book covers all typography essentials, from typefaces and type families, to kerning and tracking, to using a grid. Visual examples show how to be inventive within systems of typographic form, including what the rules are, and how to break them.'),
+        Array('Graphic Design: The New Basics', 'Ellen Lupton', 2015, 'Graphic Design', 215, 'cover.png', 'Ellen Lupton and Jennifer Cole Phillips\'s celebrated introduction to graphic design, available in a revised and updated edition. Graphic Design: The New Basics (Second Edition, Revised and Expanded) explains the key concepts of visual language that inform any work of design. A foundational graphic design book for students, Lupton and Phillips explore the formal elements of design through visual demonstrations and concise commentary. From logos to letterhead to complex website design, this is a graphic design book for everyone, no matter your design project or focus.'),
+        Array('The Programmer\'s Brain', 'Felienne Hermans', 2021, 'Computer Programming', 133, 'cover.jpg', 'The Programmer’s Brain unlocks the way we think about code. It offers scientifically sound techniques that can radically improve the way you master new technology, comprehend code, and memorize syntax. You’ll learn how to benefit from productive struggle and turn confusion into a learning tool. Along the way, you’ll discover how to create study resources as you become an expert at teaching yourself and bringing new colleagues up to speed.'),
+        Array('Introduction to Graph Theory', 'Richard J. Trudeau', 1994, 'Mathematics', 871, 'cover.jpg', 'A stimulating excursion into pure mathematics aimed at "the mathematically traumatized," but great fun for mathematical hobbyists and serious mathematicians as well. Requiring only high school algebra as mathematical background, the book leads the reader from simple graphs through planar graphs, Euler\'s formula, Platonic graphs, coloring, the genus of a graph, Euler walks, Hamilton walks, and a discussion of The Seven Bridges of Konigsberg. Exercises are included at the end of each chapter. "The topics are so well motivated, the exposition so lucid and delightful, that the book\'s appeal should be virtually universal . . . Every library should have several copies"'),
+        Array('Introductory Discrete Mathematics', 'V.K Balakrishnan', 2010, 'Computer Science', 299, 'cover.jpg', 'This concise text offers an introduction to discrete mathematics for undergraduate students in computer science and mathematics. Mathematics educators consider it vital that their students be exposed to a course in discrete methods that introduces them to combinatorial mathematics and to algebraic and logical structures focusing on the interplay between computer science and mathematics. The present volume emphasizes combinatorics, graph theory with applications to some stand network optimization problems, and algorithms to solve these problems.'),
+        Array('Lean UX: Designing Great Products with Agile Teams', 'Jeff Gothelf', 2016, 'Business', 231, 'cover.jpg', 'Lean UX has become the preferred approach to interaction design, tailor-made for today’s agile teams. In the second edition of this award-winning book, leading advocates Jeff Gothelf and Josh Seiden expand on the valuable Lean UX principles, tactics, and techniques covered in the first edition to share how product teams can easily incorporate design, experimentation, iteration, and continuous learning from real users into their Agile process.'),
+        Array('Information Architecture', 'Louis Rosenfeld', 2015, 'User experience', 871,'cover.jpg', 'Information architecture (IA) is far more challenging - and necessary - than ever. With the glut of information available today, anything your organization wants to share should be easy to find, navigate, and understand. But the experience you provide has to be familiar and coherent across multiple interaction channels, from the web to smartphones, smartwatches, and beyond.'),
+        Array('Colombiana: A Rediscovery of Recipes and Rituals from the Soul of Colombia', 234, 'Mariana Velásquez', 2021, 'Recipes', 'cover.jpg', 'In Colombiana, the award-winning recipe developer and food stylist draws on the rich culinary traditions of her native land and puts her own modern twist on dishes beloved by generations of Colombians. Here are recipes for classics such as arepas and empanadas, as well as “Colombian-ish” recipes like Lomito de Cerdo al Tamarindo y Menta (Tamarind Pork Tenderloin with Mint), Gazpacho de Papaya y Camarón Tostado (Spicy Papaya and Charred Shrimp Gazpacho), and Cuchuco de Trigo con Pollito y Limón (Lemony Bulgur Farmer’s Chicken Soup). '),
+        Array('The Korean Vegan Cookbook: Reflections and Recipes from Omma\'s Kitchen', 105, 'Joanne Lee Molinaro', 2021, 'Recipes', 'cover.jpg', 'Joanne Lee Molinaro has captivated millions of fans with her powerfully moving personal tales of love, family, and food. In her debut cookbook, she shares a collection of her favorite Korean dishes, some traditional and some reimagined, as well as poignant narrative snapshots that have shaped her family history.'),
+        Array('India: A History. Revised and Updated', 'John Keay', 2011, 'History', 921, 'cover.jpg', 'In charting the evolution of the rich tapestry of cultures, religions, and peoples that comprise the modern nations of Pakistan, India, and Bangladesh, Keay weaves together insights from a variety of scholarly fields to create a rich historical narrative. Wide-ranging and authoritative, India: A History is a compelling epic portrait of one of the world’s oldest and most richly diverse civilizations.'),
+        Array('A History of Japan: Revised Edition', 'R.H.P Mason', 1997, 'History', 555, 'cover.jpg', 'Newly revised and updated, A History of Japan is a single-volume, complete history of the nation of Japan. Starting in ancient Japan during its early pre-history period A History of Japan covers every important aspect of history and culture through feudal Japan to the post-cold War period and collapse of the Bubble Economy in the early 1990\'s. Recent findings shed additional light on the origins of Japanese civilization and the birth of Japanese culture.'),
+        Array('A Birder\'s Guide to Belize', 'Bert Frenz', 2013, 'Ornithology', 131, 'cover.jpg', 'One of the world’s premier birding destinations, BELIZE can be the perfect introduction to tropical birding for those new to the tropics and a birding paradise for all levels of birders. The country’s dozens of great birding sites spread across the contrasting habitats of the famous barrier reef and tropical islands, to the coastal plain and its renowned lagoons and rivers through lush rainforest, to the highlands of Mountain Pine Ridge with stunning waterfalls and the Maya Mountains that hide ancient Maya ruins. This small country proffers a friendly, English-speaking population proud of its conservation ethic, excellent lodging, and superb birding—all combining to make a trip to Belize one that no birder should miss! A Birder’s Guide to Belize has all the information that the visiting birder will need: Descriptions of over 100 birding sites, including a special section on nearby Tikal National Park in Guatemala. Help in locating the Belize specialty birds, among the 591 species recorded in Belize. 45 maps and directions with hundreds of GPS coordinates. Bar graphs and an annotated checklist to travel tips, lodging recommendations, advice for getting around in Belize.'),
+   )
+   
+   foreach($book_array[0] as $book){
+      echo $book;
+   }
+
+
+
+
+
+
+   class DatabaseOperations extends Database {
+        public function create($sql) {
+            return $this->query_result($sql); // string
+        }
+
+        public function read($table) {
+             $query = "SELECT * FROM {$table}";
+             return $this->query_result($query); // object
+          }
+
+        public function update($table, $column, $value, $id) {
+            $query = "UPDATE {$table} SET {$column}='$value' WHERE id={$id}";
+            return $this->query_result($query); //returns a string
+        }
+
+        public function delete($table, $id){
+           $query = "DELETE FROM {$table} WHERE id={$id}";
+           return $this->query_result($query); // string
+        }
+
+        public function sort($table, $columns, $filter, $order) {
+           $query = "{$columns} FROM {$table} ORDER BY {$filter} {$order}";
+           return $this->query_result($query);
+        }
+
+        public function pagination($table, $limit, $offset){
+            $query = "SELECT * FROM {$table} LIMIT {$limit} OFFSET {$offset}";
+            return $this->query_result($query);
+        }    
+
+    }
+
+
+    $db = new DatabaseOperations('127.0.0.1', 'root', 'root', 'bookstash', 8889);
+    $book = $db->read('book');
+    //echo $book->title;
+    //$update_title = $db->update('book', 'title', 'Learning Sinatra!!!', 3);
+    // $table = $db->create(
+    //     "CREATE TABLE cars(
+    //         id int(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //         brand VARCHAR(100) NOT NULL,
+    //         make VARCHAR(100) NOT NULL,
+    //         color VARCHAR(100) NOT NULL)");
+
+    // $delete_user = $db->delete('book', 3);
+    // echo $delete_user;
+
+
+
+
+
+
+?>
+<?php include __DIR__.'/../includes/footer.php';?>

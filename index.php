@@ -1,11 +1,11 @@
 <?php require_once 'includes/header.php' ?>
-<div>
+<div id="masthead">
   <h1>A community for readers</h1>
   <h2>Read, Review, Discuss your favorite Books</h2>
   <button>Sign up</button>
 </div>
-<div>
-   <div>
+<div id="features">
+   <div id="community">
       <img src="" alt="">
       <h3>Community</h3>
       <p>
@@ -14,7 +14,7 @@
         dedicated to your reading goals
       </p>
    </div> 
-   <div>
+   <div id="book-reviews">
    <img src="" alt="">
       <h3>Book reviews</h3>
       <p>
@@ -24,7 +24,7 @@
          you would like to read
       </p>
    </div> 
-   <div>
+   <div id="authors-hub">
    <img src="" alt="">
       <h3>An authors hub</h3>
       <p>
@@ -35,7 +35,8 @@
       </p>
    </div> 
 </div>
-<div>
+<div id="about-content">
+<div id="about">
     <h1>About</h1>
     <p>
        Bookstash is a community for readers as well as authors. A place to read reviews on books you have interest in as well as set reading goals for yourself, discuss book topics or join 
@@ -43,13 +44,14 @@
        get more in depth.
     </p>
 </div>
-<div>
-   <h1>Contact</h1>  
+</div>
+<div id="contact"> 
    <form>
-      <input type="" name="" placeholder="">
-      <input type="" name="" placeholder="">
-      <input type="" name="" placeholder="">
-      <textarea name="" placeholder=""></textarea>
+   <h1>Contact</h1> 
+      <input type="text" name="name" placeholder="Name">
+      <input type="email" name="email" placeholder="E-mail">
+      <input type="text" name="subject" placeholder="Subject">
+      <textarea name="message" placeholder="Message"></textarea>
       <button>send</button>
    </form> 
 </div>
